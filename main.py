@@ -1,3 +1,4 @@
+import time
 from datetime import datetime, timedelta
 from gcsa.google_calendar import GoogleCalendar
 import config
@@ -10,8 +11,11 @@ def look_for_matching_event():
     for event in calendar.get_events(datetime.now(),
                                      datetime.now() + timedelta(days=config.antal_dagar_framåt_scriptet_ska_kolla)):
         if "wellness" in str(event.location).lower():
-
-            update_reminders_for_event(event)
+            if "PopupReminder - minutes_before_start:600" in str(event.reminders):
+                print("Påminnelsen är redan satt")
+            else:
+                print("Påminnelsen är inte satt, sätter påminnelsen")
+                update_reminders_for_event(event)
 
 
 def update_reminders_for_event(event):
@@ -21,5 +25,6 @@ def update_reminders_for_event(event):
     updated_event = calendar.update_event(event)
     print(updated_event)
 
-
-look_for_matching_event()
+while True:
+    look_for_matching_event()
+    time.sleep(60) # scriptet körs 1 gång i minuten
