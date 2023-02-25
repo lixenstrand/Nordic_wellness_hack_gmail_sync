@@ -4,7 +4,7 @@ from gcsa.google_calendar import GoogleCalendar
 import config
 
 gc = GoogleCalendar(credentials_path='credentials/credentials.json')
-calendar = GoogleCalendar(config.gmail_dit_du_syncar_passen_till, credentials_path='credentials/credentials.json')
+calendar = GoogleCalendar(config.gmail_you_want_to_check_the_calender, credentials_path='credentials/credentials.json')
 
 
 def look_for_matching_event():
