@@ -11,7 +11,7 @@ def look_for_matching_event():
     for event in calendar.get_events(datetime.now(),
                                      datetime.now() + timedelta(days=config.amount_of_days_forward_you_want_the_calender_to_check)):
         if "wellness" in str(event.location).lower():
-            if "PopupReminder - minutes_before_start:600" in str(event.reminders):
+            if "PopupReminder - minutes_before_start:300" in str(event.reminders):
                 print("Påminnelsen är redan satt")
             else:
                 print("Påminnelsen är inte satt, sätter påminnelsen")
@@ -27,4 +27,4 @@ def update_reminders_for_event(event):
 
 while True:
     look_for_matching_event()
-    time.sleep(60) # scriptet körs 1 gång i minuten
+    time.sleep(300) # scriptet körs 1 gång var 5 minut
